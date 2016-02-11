@@ -1,0 +1,12 @@
+{
+    "manifest_version": 2,
+
+    "name": "Travel Search",
+    "description": "This extension assists user with travel searches opening up useful links in multiple tabs",
+    "version": "1.0",
+
+    "browser_action": {
+        "default_icon": "images/icon.png",
+        "default_popup": "popup.html"
+    }
+}

@@ -1,0 +1,17 @@
+h2 {
+    color:darkgreen;
+}
+
+#desciptiveText {
+	margin-bottom: 10px;
+}
+
+/* Status messages */
+
+#status {
+    color:green;
+}
+
+#statusError {
+    color:red;
+}

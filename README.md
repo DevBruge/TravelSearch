@@ -7,7 +7,7 @@ This extension allows the user so search many useful travel sites with little ef
 ###Under Development
 
 ####BUSINESS REQUIREMENTS
-- Browser action containing search field and button
+- Browser action containing search field and button*****
 - Searches from the following websites:
 	- tripadvisor
 	- wikitravel
