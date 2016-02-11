@@ -2,14 +2,14 @@ var defaultOptions;
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	chrome.runtime.getBackgroundPage(function(eventPage){
+	// chrome.runtime.getBackgroundPage(function(eventPage){
 
 		//initialize the browser action page
 		initializeForm();
 
 		//hook up the search button
 	    document.getElementById("buttonSearch").addEventListener("click", onSearch);
-	});
+	// });
 });
 
 // Ensure that the browser action page is loaded with the last saved values (or defaults)
@@ -32,7 +32,21 @@ function onSearch() {
 // and open a tab for each
 function searchTravelSites(location) {
 	// TODO: Add travel website search
-	alert(location);
+	
+	var windowCreateProperties = {
+		url: ['http://www.ddg.gg', 'http://www.google.com']
+	};
+
+	chrome.windows.create(windowCreateProperties);
+
+	// var createProperties = {
+	// 	url: 'http://www.ddg.gg',
+	// 	// active: false, //default is true
+	// };
+
+	// chrome.tabs.create(createProperties, function(tab) {
+		
+	// });
 }
 
 // Writes a status message to the screen. Informational or error, which get styled with CSS file
