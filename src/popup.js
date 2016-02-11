@@ -8,14 +8,11 @@ const tokenLocation = "{%location}";
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	// chrome.runtime.getBackgroundPage(function(eventPage){
+	//initialize the browser action page
+	initializeForm();
 
-		//initialize the browser action page
-		initializeForm();
-
-		//hook up the search button
-	    document.getElementById("buttonSearch").addEventListener("click", onSearch);
-	// });
+	//hook up the search button
+    document.getElementById("buttonSearch").addEventListener("click", onSearch);
 });
 
 // Ensure that the browser action page is loaded with the last saved values (or defaults)
@@ -50,6 +47,23 @@ function searchTravelSites(location) {
 function openTravelSiteWithLocation(travelSite,location) {
 	var webLink = travelSite.replace(tokenLocation,location);
 	console.log(webLink);
+
+	// TODO: Add travel website search
+	
+	var windowCreateProperties = {
+		url: ['http://www.ddg.gg', 'http://www.google.com']
+	};
+
+	chrome.windows.create(windowCreateProperties);
+
+	// var createProperties = {
+	// 	url: 'http://www.ddg.gg',
+	// 	// active: false, //default is true
+	// };
+
+	// chrome.tabs.create(createProperties, function(tab) {
+		
+	// });
 }
 
 function validateLocation(location) {
