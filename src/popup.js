@@ -1,8 +1,9 @@
 var defaultOptions;
 
-var travelSites = [
-	"http://wikipedia.org/wiki/{%location}"
-];
+var travelSites = {
+	"wikipedia": "http://wikipedia.org/wiki/{%location}",
+	"gmaps": "http://maps.google.com/?q={%location}"
+};
 
 const tokenLocation = "{%location}";
 
@@ -25,6 +26,7 @@ function initializeForm(){
 function onSearch() {
 	
 	var location = document.getElementById("textboxLocation").value;
+
 	// If the parameters are all valid, proceed with the search
 	if (validateLocation(location)) {
 		searchTravelSites(location);
@@ -34,12 +36,57 @@ function onSearch() {
 // Search the travel sites used by this extension
 // and open a tab for each
 function searchTravelSites(location) {
+
+	var weblinks = [];
 	
-	// Iterate travel sites from array
-	var ctr;
-	for (ctr = 0; ctr < travelSites.length; ++ctr) {
-    	openTravelSiteWithLocation(travelSites[ctr],location);
+	for (var key in travelSites) {
+
+		var preparedWL;
+
+		if (key == "wikipedia") {
+			preparedWL = parseWikipediaLink(travelSites[key],location);
+		} else if (key == "gmaps") {
+			preparedWL = parseGoogleMapsLink(travelSites[key],location);
+		}
+
+		weblinks.push(preparedWL);
 	}
+
+	// TODO: organize the below website opening code
+	// TODO: make the below website opening code work with the 'new window' check box
+	var windowCreateProperties = {
+		url: weblinks
+	};
+
+	chrome.windows.create(windowCreateProperties);
+
+	// var createProperties = {
+	// 	url: 'http://www.ddg.gg',
+	// 	// active: false, //default is true
+	// };
+
+	// chrome.tabs.create(createProperties, function(tab) {
+		
+	// });
+}
+
+
+
+	// // Iterate travel sites from array
+	// var ctr;
+	// for (ctr = 0; ctr < travelSites.length; ++ctr) {
+ //    	openTravelSiteWithLocation(travelSites[ctr],location);
+	// }
+
+
+function parseWikipediaLink(site,location) {
+	var parsedLink = site.replace(tokenLocation,location);
+	return parsedLink;
+}
+
+function parseGoogleMapsLink(site,location) {
+	var parsedLink = site.replace(tokenLocation,location);
+	return parsedLink;
 }
 
 // Opens the travel site with the location provided. Each site
